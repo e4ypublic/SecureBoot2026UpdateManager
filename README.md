@@ -1,0 +1,1 @@
+# SecureBoot2026UpdateManager

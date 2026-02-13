@@ -44,20 +44,20 @@ Microsoft's three Secure Boot certificates from 2011 are expiring between **June
 ## ✨ Features
 
 ### 🖥️ **Dual Interface**
-- **Modern WPF GUI** with 3-tab interface (Device Info | Certificates | Servicing)
+- **Modern WPF GUI** with 3-tab interface
 - **Console CLI** for scripting and automation
 - **Company Branding** with CI colors and logo
 
 ### 🔍 **Comprehensive Analysis**
-- Secure Boot status detection (Enabled/Disabled/Unsupported)
-- UEFI certificate verification (KEK, DB, dbx)
+- Secure Boot status detection
+- UEFI certificate verification
 - Device and firmware information collection
 - Registry configuration analysis
 
 ### ⚙️ **Update Management**
 - **CFR Opt-In Mode**: Enable Canary-First Rollout via Windows Update
 - **Manual Mode**: Immediate deployment with 0x5944 bitmask
-- **Opt-Out High Confidence**: Skip high-confidence updates in CFR mode
+- **Opt-Out High Confidence**: Opt-Out option for high confidence mode
 - Scheduled task triggering
 - WhatIf/Confirm support for safe testing
 
@@ -66,33 +66,27 @@ Microsoft's three Secure Boot certificates from 2011 are expiring between **June
   - Detection script for compliance checking
   - CFR Opt-In remediation
   - Manual mode remediation
-- Ready for enterprise deployment
-- SYSTEM context execution
+- Ready for deployment
 
 ---
 
 ## 🖼️ Screenshots
 
 ### GUI Main Window
-
+![Gui Window](bin/img/GuiWindow.png?raw=true "Gui Window")
 
 ### Console Output
-
+![Console Windows](bin/img/GuiWindow.png?raw=true "Console Window")
 
 ---
 
 ## 🚀 Quick Start
 
-### Check Secure Boot Status (GUI)
+### Launch GUI
 
 ```powershell
 .\Get-SecureBoot2026.ps1
 ```
-
-The GUI launches by default showing:
-- Device information and Secure Boot status
-- Certificate analysis (KEK, DB, dbx)
-- Update configuration options
 
 ### Check Status (Console)
 
@@ -100,13 +94,13 @@ The GUI launches by default showing:
 .\Get-SecureBoot2026.ps1 -Silent -Mode Check
 ```
 
-### Enable CFR Opt-In
+### Enable CFR Opt-In (Console)
 
 ```powershell
 .\Get-SecureBoot2026.ps1 -Silent -Mode Update -UpdateMode CFR
 ```
 
-### Manual Update (Immediate)
+### Manual Update (Console)
 
 ```powershell
 .\Get-SecureBoot2026.ps1 -Silent -Mode Full -UpdateMode Manual
@@ -150,7 +144,7 @@ Display Secure Boot status in the terminal:
 
 ---
 
-### Silent Mode (Automation)
+### Automation examples
 
 For scripted deployments without user interaction:
 
@@ -166,29 +160,6 @@ For scripted deployments without user interaction:
 
 # Export with timestamp
 .\Get-SecureBoot2026.ps1 -Silent -Mode Check -ExportPath "SecureBoot_$(Get-Date -F 'yyyyMMdd_HHmmss').json"
-```
-
----
-
-### Advanced Usage (Pipeline)
-
-Leverage PowerShell pipeline for custom reporting:
-
-```powershell
-# Import module functions
-Import-Module .\bin\SecureBootUpdate.psm1
-
-# Get structured data
-$data = Get-SecureBootData
-
-# Console output
-$data | Show-SecureBootConsole
-
-# JSON export
-$data | ConvertTo-Json -Depth 5 | Out-File report.json
-
-# Custom processing
-$data.Certificates.KEK | Where-Object Present -eq $true
 ```
 
 ---
@@ -217,11 +188,6 @@ The `StandaloneIntuneRemediations\` folder contains three scripts for Microsoft 
 
 **Purpose**: Enables Canary-First Rollout for gradual deployment
 
-**Actions**:
-1. Creates/verifies registry path: `HKLM:\SYSTEM\CurrentControlSet\Control\SecureBoot`
-2. Sets `MicrosoftUpdateManagedOptIn = 1` (DWORD)
-3. Returns Exit 0 on success
-
 **Deployment**: Use for pilot groups or organizations preferring gradual rollout
 
 ### Remediation Script (Manual Mode)
@@ -229,12 +195,6 @@ The `StandaloneIntuneRemediations\` folder contains three scripts for Microsoft 
 **File**: `IntuneRemediateSecureBootUpdateManual.ps1`
 
 **Purpose**: Immediately triggers Secure Boot updates
-
-**Actions**:
-1. Checks if `UEFICA2023Status = Updated` (already applied)
-2. Sets `AvailableUpdates = 0x5944` (all update bits)
-3. Triggers `\Microsoft\Windows\PI\Secure-Boot-Update` scheduled task
-4. Returns Exit 0 on success
 
 
 **Deployment**: Use for production rollout with immediate application
@@ -255,7 +215,7 @@ The `StandaloneIntuneRemediations\` folder contains three scripts for Microsoft 
    - **Enforce script signature check**: No
    
 4. **Schedule**:
-   - **Run daily** (recommended)
+   - **Run daily/hourly**
    - **Maximum timeout**: 10 minutes
    
 5. **Assignments**:

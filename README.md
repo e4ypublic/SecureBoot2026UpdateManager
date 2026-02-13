@@ -76,7 +76,7 @@ Microsoft's three Secure Boot certificates from 2011 are expiring between **June
 ![Gui Window](bin/img/GuiWindow.png?raw=true "Gui Window")
 
 ### Console Output
-![Console Windows](bin/img/GuiWindow.png?raw=true "Console Window")
+![Console Windows](bin/img/ConsoleWindow.png?raw=true "Console Window")
 
 ---
 

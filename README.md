@@ -6,9 +6,6 @@
 
 **Comprehensive PowerShell toolkit for managing the Windows Secure Boot 2026 certificate update**
 
-🌐 **Website**: [www.experience4you.de](https://www.experience4you.de)  
-📧 **Professional Business Support**: [support@experience4you.de](mailto:support@experience4you.de)
-
 ---
 
 ## 🔐 Generell Background

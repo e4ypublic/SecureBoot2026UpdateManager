@@ -32,8 +32,8 @@ Microsoft's three Secure Boot certificates from 2011 are expiring between **June
 
 ### Deployment Modes
 - **Modes**: 
-  - **Microsoft High Confidence Bucket**: Automatic update for high confidence devices 
-  - **CFR (Canary-First Rollout)**: Gradual Windows Update deployment
+  - **Microsoft High Confidence Bucket**: Automatic update for high confidence devices through Windows Update
+  - **CFR (Controlled Feature Rollout)**: Controlled deployment through Windows Update (Opt-in)
   - **Manual**: Immediate administrator-controlled deployment
 
 ---
@@ -52,7 +52,7 @@ Microsoft's three Secure Boot certificates from 2011 are expiring between **June
 - Registry configuration analysis
 
 ### ⚙️ **Update Management**
-- **CFR Opt-In Mode**: Enable Canary-First Rollout via Windows Update
+- **CFR Opt-In Mode**: Enable Controlled Feature Rollout via Windows Update
 - **Manual Mode**: Immediate deployment with 0x5944 bitmask
 - **Opt-Out High Confidence**: Opt-Out option for high confidence mode
 - Scheduled task triggering
@@ -183,7 +183,7 @@ The `StandaloneIntuneRemediations\` folder contains three scripts for Microsoft 
 
 **File**: `IntuneRemediateSecureBootUpdateCFROptIn.ps1`
 
-**Purpose**: Enables Canary-First Rollout for gradual deployment
+**Purpose**: Enables Controlled Feature Rollout for gradual deployment
 
 **Deployment**: Use for pilot groups or organizations preferring gradual rollout
 

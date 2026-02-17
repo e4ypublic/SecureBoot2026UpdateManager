@@ -458,8 +458,12 @@ function Show-SecureBootGUI {
                     $controls.txtUpdateStatus.Text = "✓ System is already up-to-date. No action required."
                     $controls.txtUpdateStatus.Foreground = "#00ff00"
                     $controls.btnApplyUpdate.IsEnabled = $false
+                } elseif ($data.Servicing.UEFICA2023Status -eq 'InProgress') {
+                    $controls.txtUpdateStatus.Text = "⚠ Update in progress. Please wait for completion. Reboots may be required after applying."
+                    $controls.txtUpdateStatus.Foreground = "#ffaa00"
+                    $controls.btnApplyUpdate.IsEnabled = $false
                 } else {
-                    $controls.txtUpdateStatus.Text = "⚠ Update available. Please configure and apply updates."
+                    $controls.txtUpdateStatus.Text = "⚠ Update available. Please configure and apply updates. Reboots may be required after applying."
                     $controls.txtUpdateStatus.Foreground = "#ff8700"
                     $controls.btnApplyUpdate.IsEnabled = $true
                 }

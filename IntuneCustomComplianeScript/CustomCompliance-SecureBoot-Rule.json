@@ -1,0 +1,23 @@
+{
+  "Rules": [
+    {
+      "SettingName": "HasNewSecureBootCertificates",
+      "Operator": "IsEquals",
+      "DataType": "Boolean",
+      "Operand": true,
+      "MoreInfoUrl": "https://learn.microsoft.com/mem/intune/protect/compliance-use-custom-settings",
+      "RemediationStrings": [
+        {
+          "Language": "en_US",
+          "Title": "Secure Boot certificates are not up to date",
+          "Description": "The device is missing required Secure Boot 2023 certificates. Ensure Windows UEFI CA 2023 is present in DB and Microsoft Corporation KEK 2K CA 2023 is present in KEK."
+        },
+        {
+          "Language": "de_DE",
+          "Title": "Secure Boot Zertifikate sind nicht aktuell",
+          "Description": "Dem Geraet fehlen erforderliche Secure Boot 2023 Zertifikate. Stellen Sie sicher, dass Windows UEFI CA 2023 in DB und Microsoft Corporation KEK 2K CA 2023 in KEK vorhanden sind."
+        }
+      ]
+    }
+  ]
+}

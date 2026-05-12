@@ -219,6 +219,45 @@ The `StandaloneIntuneRemediations\` folder contains three scripts for Microsoft 
    - Assign to pilot group (CFR) or production group (Manual)
    - Monitor compliance in Intune reporting
 
+### Intune Custom Compliance
+
+The `IntuneCustomComplianeScript\` folder contains a discovery script and the matching
+rule definition for Microsoft Intune Custom Compliance.
+
+**Files**:
+- `Detect-SecureBootCustomCompliance.ps1`
+- `CustomCompliance-SecureBoot-Rule.json`
+
+**Discovery output**:
+- Returns one JSON object on STDOUT
+- Main compliance field: `HasNewSecureBootCertificates`
+- Additional diagnostic fields include DB/KEK and conditional replacement status
+
+**Compliance logic**:
+- ✅ **Compliant**:
+   - `HasNewSecureBootCertificates = true`
+- ❌ **Non-Compliant**:
+   - Secure Boot unsupported
+   - Secure Boot disabled
+   - Windows UEFI CA 2023 missing in DB
+   - Microsoft Corporation KEK 2K CA 2023 missing in KEK
+   - `Microsoft Corporation UEFI CA 2011` present, but the 2023 replacement certs are missing
+
+**Intune deployment**:
+1. Navigate to: **Devices** -> **Compliance policies** -> **Scripts** -> **Custom compliance**
+2. Upload `Detect-SecureBootCustomCompliance.ps1` as the discovery script
+3. Upload `CustomCompliance-SecureBoot-Rule.json` as the rules file
+4. Configure the script to run in 64-bit PowerShell and in SYSTEM context
+5. Assign the policy to a pilot group first
+
+**Example JSON fields**:
+- `HasNewSecureBootCertificates`
+- `ComplianceStatus`
+- `Reason`
+- `DbHasWindowsUefiCa2023`
+- `KekHasMicrosoftKek2kCa2023`
+- `ConditionalDbOk`
+
 ---
 
 ## 📄 License

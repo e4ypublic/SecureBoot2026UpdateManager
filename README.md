@@ -246,7 +246,7 @@ rule definition for Microsoft Intune Custom Compliance.
 **Intune deployment**:
 1. Navigate to: **Devices** -> **Compliance policies** -> **Scripts** -> **Custom compliance**
 2. Upload `Detect-SecureBootCustomCompliance.ps1` as the discovery script
-3. Upload `CustomCompliance-SecureBoot-Rule.json` as the rules file
+3. Create new Compliance Policy and upload `CustomCompliance-SecureBoot-Rule.json` as the rules file
 4. Configure the script to run in 64-bit PowerShell and in SYSTEM context
 5. Assign the policy to a pilot group first
 
